@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.itcast.dao.IUserDao">
+    <resultMap id="resultMap" type="user">
+        <id property="id" column="id" ></id>
+        <result property="username" column="username" ></result>
+        <result property="birthday" column="birthday" ></result>
+        <result property="sex" column="sex" ></result>
+        <result property="iaddressd" column="iaddressd" ></result>
+
+        <collection property="accounts" ofType="account">
+            <result property="id" column="aid"></result>
+            <result property="uid" column="uid"></result>
+            <result property="money" column="money"></result>
+        </collection>
+
+    </resultMap>
+    <select id="findAll" resultMap="resultMap">
+        SELECT u.*,a.id  aid,a.uid,a.money FROM USER u,account a WHERE u.id=a.uid
+    </select>
+</mapper>
